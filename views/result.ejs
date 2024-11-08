@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arama Sonuçları</title>
+  <style>
+@import url('https://fonts.googleapis.com/css2?family=Lilita+One&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background-color: #1e293b;
+      color: #ffffff;
+    }
+    
+  .separator {
+    width: 12rem;
+    height: 0.25rem;       
+    margin: 1rem auto;      
+    background-color: #f3f4f6; 
+    border: none;          
+    border-radius: 0.25rem;
+  }
+
+  @media (min-width: 768px) {
+    .separator {
+      margin-top: 2.5rem;
+      margin-bottom: 2.5rem;
+    }
+  }
+
+  body.dark .separator {
+    background-color: #374151;
+  }
+
+  body {
+  color: white;
+  font-family: "Noto Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
+  }
+  </style>
+</head>
+<body class="bg-slate-800 text-white min-h-screen flex flex-col items-center p-6">
+  
+  <div class="mb-6">
+    <img src="https://raw.githubusercontent.com/devyigit/Web-Terminal/refs/heads/main/synapic.png" alt="Logo" class="w-32 h-32 rounded-full mx-auto">
+  </div>
+
+  <form action="/search" method="GET" class="flex items-center max-w-sm mx-auto mb-6">
+    <label for="simple-search" class="sr-only">Search</label>
+    <div class="relative w-full">
+      <input type="text" id="simple-search" name="query" class="bg-gray-700 border border-gray-600 text-gray-100 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5" placeholder="Sonsuzluğu Ara..." required />
+    </div>
+    <button type="submit" class="p-2.5 ml-2 text-sm font-medium text-white bg-blue-600 rounded-lg border border-blue-700 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-500">
+      <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+      </svg>
+      <span class="sr-only">Search</span>
+    </button>
+  </form>
+
+<hr class="separator">  
+  <h1 class="text-2xl mb-4"><i class="fa-duotone fa-solid fa-solar-system"></i></h1>
+  <ul class="space-y-4">
+    <% if (results && results.length > 0) { %>
+      <% results.forEach(result => { %>
+        <li class="bg-gray-700 p-4 rounded-lg shadow-md">
+          <a href="<%= result.link %>" target="_blank" class="text-blue-400 hover:underline text-lg"><%= result.title %></a>
+          <p class="text-gray-300"><%= result.snippet %></p>
+          <p class="text-yellow-400">Rating: <%= '⭐'.repeat(result.rating) %> (<%= result.rating %>/10)</p>
+        </li>
+      <% }) %>
+    <% } else { %>
+      <p>Sonuç bulunamadı.</p>
+    <% } %>
+  </ul>
+  <a href="/" class="inline-block mt-6 text-blue-400 hover:underline">Geri Dön</a>
+</body>
+    </html>
