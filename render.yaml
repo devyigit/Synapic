@@ -11,6 +11,3 @@ services:
         value: production
       - key: PORT
         value: 3000
-    routes:
-      - type: http
-        source: /
