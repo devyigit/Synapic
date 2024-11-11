@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: node-app
+    env: node
+    plan: free
+    region: frankfurt
+    buildCommand: "npm install"
+    startCommand: "node app.js"
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000
+    routes:
+      - type: http
+        source: /
+        targetPort: 3000
