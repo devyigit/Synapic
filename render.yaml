@@ -14,4 +14,3 @@ services:
     routes:
       - type: http
         source: /
-        targetPort: 3000
