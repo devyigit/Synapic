@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: node-app
+    name: synapic
     env: node
     plan: free
     region: frankfurt
