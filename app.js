@@ -7,31 +7,31 @@ const googleApiKey = 'AIzaSyCXcO_MuQ0sjzLzlI3DeMaYeMSIPptxHEQ';
 const googleCx = '14186417efcac49f0';
 const ipinfoToken = 'c621d5706831cd';
 
+// Geçerli API anahtarları listesi
+const validApiKeys = ["synapicsearch"];
+
 app.set('view engine', 'ejs');
 app.set('views', './views');
 app.use(express.static('public'));
 
-app.get('/', async (req, res) => {
-  let countryCode = "N/A";
-
-  try {
-    const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-    const response = await axios.get(`https://ipinfo.io/${ip}?token=${ipinfoToken}`);
-    countryCode = response.data.country;
-  } catch (error) {
-    console.error("Ülke kodu alınırken bir hata oluştu:", error);
+// API Key doğrulama middleware
+function apiKeyMiddleware(req, res, next) {
+  const apiKey = req.query.api_key; // API key'yi sorgu parametresinden al
+  if (!apiKey || !validApiKeys.includes(apiKey)) {
+    return res.status(403).json({ error: "Geçersiz veya eksik API anahtarı" });
   }
+  next(); // API key geçerli, devam et
+}
 
-  res.render('index', { countryCode });
-});
-
+// Sistem için kullanılan arama rotası (kullanıcılar için)
 app.get('/search', async (req, res) => {
   const query = req.query.query;
   if (!query) return res.send('Arama sorgusu eksik!');
 
   let countryCode = "N/A";
   try {
-    const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    // IP adresini doğru almak için 'x-forwarded-for' başlığını kontrol et
+    const ip = req.headers['x-forwarded-for']?.split(',')[0] || req.connection.remoteAddress;
     const response = await axios.get(`https://ipinfo.io/${ip}?token=${ipinfoToken}`);
     countryCode = response.data.country;
   } catch (error) {
@@ -47,14 +47,72 @@ app.get('/search', async (req, res) => {
       title: item.title,
       link: item.link,
       snippet: item.snippet,
-      rating: Math.floor(Math.random() * 10) + 1
+      rating: Math.floor(Math.random() * 10) + 1,
+      image: item.pagemap?.cse_image?.[0]?.src || null // Görsel ekliyoruz
     }));
 
-    res.render('result', { results, countryCode });
+    const images = results
+      .filter(result => result.image) // Sadece resimli sonuçları filtrele
+      .map(result => ({ image: result.image, link: result.link }));
+
+    res.render('result', { results, images, countryCode });
   } catch (error) {
     console.error("API çağrısı sırasında hata oluştu:", error);
     res.send('Bir hata oluştu.');
   }
+});
+
+// API Key doğrulaması ile çalışan kullanıcı arama rotası
+app.get('/api/search', apiKeyMiddleware, async (req, res) => {
+  const query = req.query.query;
+  if (!query) return res.status(400).json({ error: "Arama sorgusu eksik!" });
+
+  try {
+    const searchResponse = await axios.get('https://www.googleapis.com/customsearch/v1', {
+      params: { key: googleApiKey, cx: googleCx, q: query }
+    });
+
+    const results = searchResponse.data.items.map(item => ({
+      title: item.title,
+      link: item.link,
+      snippet: item.snippet,
+      rating: Math.floor(Math.random() * 10) + 1,
+      image: item.pagemap?.cse_image?.[0]?.src || null // Görsel ekliyoruz
+    }));
+
+    res.json({ results }); // Sonuçları JSON formatında döndür
+  } catch (error) {
+    console.error("API çağrısı sırasında hata oluştu:", error);
+    res.status(500).json({ error: "Bir hata oluştu." });
+  }
+});
+
+// Ana sayfa rotası
+app.get('/', async (req, res) => {
+  let countryCode = "N/A";
+
+  try {
+    // IP adresini doğru almak için 'x-forwarded-for' başlığını kontrol et
+    const ip = req.headers['x-forwarded-for']?.split(',')[0] || req.connection.remoteAddress;
+    const response = await axios.get(`https://ipinfo.io/${ip}?token=${ipinfoToken}`);
+    countryCode = response.data.country;
+  } catch (error) {
+    console.error("Ülke kodu alınırken bir hata oluştu:", error);
+  }
+
+  res.render('index', { countryCode });
+});
+
+app.get('/bagis', (req, res) => {
+  res.redirect('https://buymeacoffee.com/yigitkabak');
+});
+
+app.get('/gizlilik-politikasi', (req, res) => {
+  res.render('gizlilik-politikasi');
+});
+
+app.get('/hizmet-sartlari', (req, res) => {
+  res.render('hizmet-sartlari');
 });
 
 app.listen(PORT, () => {
