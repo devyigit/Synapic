@@ -30,7 +30,6 @@ app.get('/search', async (req, res) => {
 
   let countryCode = "N/A";
   try {
-    // IP adresini doğru almak için 'x-forwarded-for' başlığını kontrol et
     const ip = req.headers['x-forwarded-for']?.split(',')[0] || req.connection.remoteAddress;
     const response = await axios.get(`https://ipinfo.io/${ip}?token=${ipinfoToken}`);
     countryCode = response.data.country;
@@ -48,14 +47,24 @@ app.get('/search', async (req, res) => {
       link: item.link,
       snippet: item.snippet,
       rating: Math.floor(Math.random() * 10) + 1,
-      image: item.pagemap?.cse_image?.[0]?.src || null // Görsel ekliyoruz
     }));
 
-    const images = results
-      .filter(result => result.image) // Sadece resimli sonuçları filtrele
-      .map(result => ({ image: result.image, link: result.link }));
+    const images = searchResponse.data.items
+      .filter(item => item.pagemap?.cse_image)
+      .map(item => ({
+        link: item.link,
+        image: item.pagemap.cse_image[0].src,
+      }));
 
-    res.render('result', { results, images, countryCode });
+    const shoppingResults = searchResponse.data.items
+      .map(item => ({
+        product: item.pagemap?.product?.[0]?.name || null,
+        link: item.link,
+        image: item.pagemap?.cse_image?.[0]?.src || null
+      }))
+      .filter(item => item.product);
+
+    res.render('result', { results, images, shoppingResults, countryCode });
   } catch (error) {
     console.error("API çağrısı sırasında hata oluştu:", error);
     res.send('Bir hata oluştu.');
@@ -77,10 +86,24 @@ app.get('/api/search', apiKeyMiddleware, async (req, res) => {
       link: item.link,
       snippet: item.snippet,
       rating: Math.floor(Math.random() * 10) + 1,
-      image: item.pagemap?.cse_image?.[0]?.src || null // Görsel ekliyoruz
     }));
 
-    res.json({ results }); // Sonuçları JSON formatında döndür
+    const images = searchResponse.data.items
+      .filter(item => item.pagemap?.cse_image)
+      .map(item => ({
+        link: item.link,
+        image: item.pagemap.cse_image[0].src,
+      }));
+
+    const shoppingResults = searchResponse.data.items
+      .map(item => ({
+        product: item.pagemap?.product?.[0]?.name || null,
+        link: item.link,
+        image: item.pagemap?.cse_image?.[0]?.src || null
+      }))
+      .filter(item => item.product);
+
+    res.json({ results, images, shoppingResults });
   } catch (error) {
     console.error("API çağrısı sırasında hata oluştu:", error);
     res.status(500).json({ error: "Bir hata oluştu." });
@@ -92,7 +115,6 @@ app.get('/', async (req, res) => {
   let countryCode = "N/A";
 
   try {
-    // IP adresini doğru almak için 'x-forwarded-for' başlığını kontrol et
     const ip = req.headers['x-forwarded-for']?.split(',')[0] || req.connection.remoteAddress;
     const response = await axios.get(`https://ipinfo.io/${ip}?token=${ipinfoToken}`);
     countryCode = response.data.country;
