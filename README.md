@@ -33,58 +33,45 @@ Synapic projesini yerel bilgisayarınızda çalıştırmak için aşağıdaki ad
 1. Bu repoyu klonlayın:
    ```bash
    git clone https://github.com/your-username/synapic.git
+```
 
 2. Proje klasörüne gidin:
-
+```bash
 cd synapic
+```
+
+3. app.js'i çalıştırın.
+```bash
+node app.js
+```
 
 
-3. index.html dosyasını tarayıcınızda açın.
+Proje, NodeJS kullanarak kendi motoruyla bağlantı sağlıyor bu sebeple bir sunucuda çalışıyor hiçbir şekilde cookielere ulaşmıyor ve reklam göstermiyor.
+
+# Kullanım
+
+**Synapic arama motorunu kullanmak için:**
+
+> Arama çubuğuna istediğiniz terimi yazın.
+
+> "Ara" butonuna tıklayarak sonuçları görüntüleyin.
+
+> Arama sonuçları sayfasında, sekmeler arasında geçiş yaparak web, görseller ve alışveriş sonuçlarına erişebilirsiniz.
 
 
-
-Proje, herhangi bir sunucuya ihtiyaç duymadan sadece statik dosyalarla çalışır, bu nedenle yerel ortamda sadece HTML dosyasını açarak projeyi kullanabilirsiniz.
-
-Kullanım
-
-Synapic arama motorunu kullanmak için:
-
-Arama çubuğuna istediğiniz terimi yazın.
-
-"Ara" butonuna tıklayarak sonuçları görüntüleyin.
-
-Arama sonuçları sayfasında, sekmeler arasında geçiş yaparak web, görseller ve alışveriş sonuçlarına erişebilirsiniz.
-
-
-Katkıda Bulunma
+# Katkıda Bulunma
 
 Katkıda bulunmak isterseniz, aşağıdaki adımları izleyebilirsiniz:
 
-1. Bu projeyi fork'layın.
+>  Bu projeyi fork'layın.
 
 
-2. Kendi değişikliklerinizi yapın.
+> Kendi değişikliklerinizi yapın.
 
 
-3. Değişikliklerinizi pull request (PR) olarak gönderin.
+> Değişikliklerinizi pull request (PR) olarak gönderin.
 
 
+# Lisans
 
-Yapılacak katkılar için aşağıdaki önerilere göz atabilirsiniz:
-
-Yeni özellikler eklemek.
-
-Mevcut hataları düzeltmek.
-
-Proje dokümantasyonunu güncellemek.
-
-
-Lisans
-
-Bu proje MIT Lisansı altında lisanslanmıştır. Lisans ile ilgili daha fazla bilgi için LICENSE dosyasına bakabilirsiniz.
-
-Yazarlar
-
-Proje Sahibi: Projenin başlatıcısı ve geliştiricisi.
-
-Diğer katkıda bulunanlar için Contributors sayfasını ziyaret edebilirsiniz.
+Bu proje MIT Lisansı altında lisanslanmıştır. Lisans ile ilgili daha fazla bilgi için <a href="LICENSE">LICENSE</a> dosyasına bakabilirsiniz.
