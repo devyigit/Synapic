@@ -47,24 +47,24 @@ Proje, NodeJS kullanarak kendi motoruyla bağlantı sağlıyor bu sebeple bir su
 
 **Synapic arama motorunu kullanmak için:**
 
-> Arama çubuğuna istediğiniz terimi yazın.
+- Arama çubuğuna istediğiniz terimi yazın.
 
-> "Ara" butonuna tıklayarak sonuçları görüntüleyin.
+- "Ara" butonuna tıklayarak sonuçları görüntüleyin.
 
-> Arama sonuçları sayfasında, sekmeler arasında geçiş yaparak web, görseller ve alışveriş sonuçlarına erişebilirsiniz.
+- Arama sonuçları sayfasında, sekmeler arasında geçiş yaparak web, görseller ve alışveriş sonuçlarına erişebilirsiniz.
 
 
 # Katkıda Bulunma
 
 Katkıda bulunmak isterseniz, aşağıdaki adımları izleyebilirsiniz:
 
->  Bu projeyi fork'layın.
+-  Bu projeyi fork'layın.
 
 
-> Kendi değişikliklerinizi yapın.
+- Kendi değişikliklerinizi yapın.
 
 
-> Değişikliklerinizi pull request (PR) olarak gönderin.
+- Değişikliklerinizi pull request (PR) olarak gönderin.
 
 
 # Lisans
