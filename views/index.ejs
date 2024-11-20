@@ -30,6 +30,22 @@
       </button>
     </a>
   </div>
+  
+  
+  <!-- Dil Değiştirme Menüsü -->
+  <div class="absolute top-4 left-4 z-10">
+    <button id="language-toggle" class="bg-blue-500 text-white p-2 rounded-full shadow-lg hover:bg-blue-600 focus:outline-none">
+      <i class="fas fa-globe"></i>
+    </button>
+    <div id="language-menu" class="hidden bg-gray-800 text-white rounded-lg shadow-lg mt-2 p-2">
+      <button class="language-option py-2 px-4 hover:bg-blue-500" onclick="changeLanguage('tr')">Türkçe</button>
+      <button class="language-option py-2 px-4 hover:bg-blue-500" onclick="changeLanguage('en')">English</button>
+      <button class="language-option py-2 px-4 hover:bg-blue-500" onclick="changeLanguage('de')">Deutsch</button>
+      <button class="language-option py-2 px-4 hover:bg-blue-500" onclick="changeLanguage('fr')">Français</button>
+      <button class="language-option py-2 px-4 hover:bg-blue-500" onclick="changeLanguage('ru')">Русский</button>
+      <button class="language-option py-2 px-4 hover:bg-blue-500" onclick="changeLanguage('ar')">العربية</button>
+    </div>
+  </div>
 
   <!-- Logo -->
   <div class="mb-8">
@@ -41,51 +57,38 @@
     <form action="/search" method="GET" class="flex items-center w-full">
       <label for="simple-search" class="sr-only">Arama Yap</label>
       <div class="relative w-full">
-        <input type="text" id="simple-search" name="query" class="bg-gray-700 border border-gray-600 text-gray-100 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 shadow-lg" placeholder="Sonsuzluğu Ara 🌌..." required />
+        <input type="text" id="simple-search" name="query" class="bg-gray-700 border border-gray-600 text-gray-100 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 shadow-lg" placeholder="Sonsuzluğu Ara..." required />
       </div>
       <button type="submit" class="p-2.5 ml-2 text-sm font-medium text-white bg-blue-600 rounded-lg border border-blue-700 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-500 shadow-lg">
         <i class="fas fa-search"></i>
         <span class="sr-only">Ara</span>
       </button>
-      <!-- Sesli Arama Butonu -->
+            <!-- Sesli Arama Butonu -->
       <button type="button" id="voice-search-btn" class="p-2.5 ml-2 text-sm font-medium text-white bg-green-600 rounded-lg border border-blue-700 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-500 shadow-lg">
         <i class="fas fa-microphone"></i>
       </button>
     </form>
-    <p class="text-gray-400 mt-4 text-sm">
-      <span class="font-bold"><%= countryCode %></span>
-    </p>
   </div>
 
-  <!-- Ayırıcı Çizgi -->
   <hr class="w-64 h-1 my-8 bg-gray-200 border-0 rounded dark:bg-gray-700 shadow-md">
 
   <!-- Bilgi Kısmı -->
-  <div class="text-center">
-    <h1 class="text-2xl font-semibold mb-2">Türkiye’nin Yerli Arama Motoru <i class="fa-duotone fa-solid fa-magnifying-glass"></i></h1>
+  <div id="content">
+    <h1 class="text-2xl font-semibold mb-2">Türkiye’nin Yerli Arama Motoru</h1>
     <p class="info-text text-gray-300">
       Synapic, hız ve doğruluk odaklı bir şekilde aradığınız bilgilere ulaşmanıza yardımcı olmak için tasarlanmıştır. 
       Yerli bir teknoloji olarak, modern ve kullanıcı dostu bir deneyim sunuyoruz. 
       İster bilgiye ulaşmak ister ilham almak için arama yapın, Synapic her zaman yanınızda.
     </p>
-    <br>
-    <h1 class="text-2xl font-semibold mb-2">JavaScript’in Gücünden Yararlanıyor <i style="color: yellow;" class="fa-brands fa-js"></i></h1>
-    <p class="info-text text-gray-300">
-      Synapic, arka planda JavaScript ve Embedded JavaScript (EJS) kullanarak güçlü ve hızlı bir altyapı sunar. 
-      Modern web teknolojileriyle güçlendirilmiş bir arama motoru deneyimi yaşayın.
-    </p>
-    <br>
-        <h1 class="text-2xl font-semibold mb-2">Projemize Katkıda bulun <i class="fa-brands fa-github"></i></h1>
-    <p class="info-text text-gray-300">
-      Synapic Arama Sistemi, açık kaynak bir şekilde Github'da paylaşılmaktadır. Github sayfamıza giderek kodlara erişebilir ve bize katkıda bulunabilirsiniz.
-    </p>
   </div>
-<footer class="mt-10 text-center text-gray-500 text-sm">
-      <a href="/gizlilik-politikasi">Gizlilik Politikası</a> | <a href="/hizmet-sartlari">Hizmet Şartları</a>
-</footer>
+
+  <footer class="mt-10 text-center text-gray-500 text-sm">
+    <a href="/gizlilik-politikasi">Gizlilik Politikası</a> | <a href="/hizmet-sartlari">Hizmet Şartları</a>
+  </footer>
 
 <script>
-  // Sesli Arama İşlevi
+
+    // Sesli Arama İşlevi
   const voiceSearchButton = document.getElementById('voice-search-btn');
   const searchInput = document.getElementById('simple-search');
 
@@ -103,6 +106,101 @@
   recognition.onerror = (event) => {
     console.error('Speech recognition error', event.error);
   };
+  
+  // Dil menüsünü açma/kapama
+  document.getElementById('language-toggle').addEventListener('click', function () {
+    const menu = document.getElementById('language-menu');
+    menu.classList.toggle('hidden');
+  });
+
+  // Dil değiştirme işlevi
+  function changeLanguage(language) {
+    if (language === 'tr') {
+      translateToTurkish();
+    } else if (language === 'en') {
+      translateToEnglish();
+    } else if (language === 'de') {
+      translateToGerman();
+    } else if (language === 'fr') {
+      translateToFrench();
+    } else if (language === 'ru') {
+      translateToRussian();
+    } else if (language === 'ar') {
+      translateToArabic();
+    }
+  }
+
+  function translateToTurkish() {
+    document.title = "Synapic - Türk Arama Motoru";
+    document.getElementById('content').innerHTML = `
+      <h1 class="text-2xl font-semibold mb-2">Türkiye’nin Yerli Arama Motoru</h1>
+      <p class="info-text text-gray-300">
+        Synapic, hız ve doğruluk odaklı bir şekilde aradığınız bilgilere ulaşmanıza yardımcı olmak için tasarlanmıştır. 
+        Yerli bir teknoloji olarak, modern ve kullanıcı dostu bir deneyim sunuyoruz. 
+        İster bilgiye ulaşmak ister ilham almak için arama yapın, Synapic her zaman yanınızda.
+      </p>
+    `;
+  }
+
+  function translateToEnglish() {
+    document.title = "Synapic - Turkish Search Engine";
+    document.getElementById('content').innerHTML = `
+      <h1 class="text-2xl font-semibold mb-2">Turkey’s Local Search Engine</h1>
+      <p class="info-text text-gray-300">
+        Synapic is designed to help you quickly and accurately find the information you need. 
+        As a local technology, we provide a modern and user-friendly experience. 
+        Whether you're looking for knowledge or inspiration, Synapic is always by your side.
+      </p>
+    `;
+  }
+
+  function translateToGerman() {
+    document.title = "Synapic - Deutscher Suchmaschine";
+    document.getElementById('content').innerHTML = `
+      <h1 class="text-2xl font-semibold mb-2">Türkiye Lokale Suchmaschine</h1>
+      <p class="info-text text-gray-300">
+        Synapic hilft Ihnen, die Informationen, die Sie suchen, schnell und genau zu finden. 
+        Als lokale Technologie bieten wir eine moderne und benutzerfreundliche Erfahrung. 
+        Ob Sie nach Wissen oder Inspiration suchen, Synapic ist immer für Sie da.
+      </p>
+    `;
+  }
+
+  function translateToFrench() {
+    document.title = "Synapic - Moteur de Recherche Türkiye";
+    document.getElementById('content').innerHTML = `
+      <h1 class="text-2xl font-semibold mb-2">Moteur de Recherche Local de la Türkiye</h1>
+      <p class="info-text text-gray-300">
+        Synapic vous aide à trouver les informations que vous recherchez avec rapidité et précision. 
+        En tant que technologie locale, nous offrons une expérience moderne et conviviale. 
+        Que vous cherchiez des connaissances ou de l'inspiration, Synapic est toujours à vos côtés.
+      </p>
+    `;
+  }
+
+  function translateToRussian() {
+    document.title = "Synapic - Российский Поисковик";
+    document.getElementById('content').innerHTML = `
+      <h1 class="text-2xl font-semibold mb-2">Местный поисковик России</h1>
+      <p class="info-text text-gray-300">
+        Synapic помогает находить информацию с высокой скоростью и точностью. 
+        Как локальная технология, мы предоставляем современный и удобный опыт. 
+        Ищете знания или вдохновение, Synapic всегда рядом с вами.
+      </p>
+    `;
+  }
+
+  function translateToArabic() {
+    document.title = "Synapic - محرك البحث العربي";
+    document.getElementById('content').innerHTML = `
+      <h1 class="text-2xl font-semibold mb-2">محرك البحث المحلي</h1>
+      <p class="info-text text-gray-300">
+        يساعدك Synapic في العثور على المعلومات بسرعة وبدقة. 
+        باعتبارها تقنية محلية، نقدم تجربة حديثة وسهلة الاستخدام. 
+        سواء كنت تبحث عن المعرفة أو الإلهام، فإن Synapic دائمًا بجانبك.
+      </p>
+    `;
+  }
 </script>
 </body>
 </html>
