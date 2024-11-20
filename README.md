@@ -17,7 +17,7 @@ Synapic, modern web geliştirme teknolojileri ile geliştirilmiştir:
 
 - **HTML5**: Sayfa yapısının oluşturulmasında kullanıldı.
 - **CSS3 (Tailwind CSS)**: Kullanıcı dostu ve modern bir tasarım için TailwindCSS ile stil verildi.
-- **JavaScript (Vanilla JS)**: Dinamik içerik yüklemesi ve kullanıcı etkileşimi için JavaScript kullanıldı.
+- **JavaScript (NodeJS)**: Dinamik içerik yüklemesi ve kullanıcı etkileşimi için JavaScript kullanıldı.
 - **Font Awesome**: İkonlar ve görsel öğeler için FontAwesome kütüphanesi entegre edilmiştir.
 
 ## Ekran Görüntüleri
@@ -31,18 +31,14 @@ Projenin kullanıcı arayüzünü görmek için aşağıdaki ekran görüntüler
 Synapic projesini yerel bilgisayarınızda çalıştırmak için aşağıdaki adımları takip edebilirsiniz:
 
 1. Bu repoyu klonlayın:
-   ```
-   git clone https://github.com/devyigit/synapic.git
-
+   ```git clone https://github.com/devyigit/synapic.git```
 
 2. Ana Projemizi Açın:
-   ```
-cd Synapic
+   ```cd Synapic```
 
 
 3. Ana Dosyamızı Çalıştırın:
-   ```
-node app.js
+   ```node app.js```
 
 
 Proje, NodeJS kullanarak kendi motoruyla bağlantı sağlıyor bu sebeple bir sunucuda çalışıyor hiçbir şekilde cookielere ulaşmıyor ve reklam göstermiyor.
