@@ -3,96 +3,95 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css" integrity="sha512-9xKTRVabjVeZmc+GUW8GgSmcREDunMM+Dt/GrzchfN8tkwHizc5RP4Ok/MXFFy5rIjJjzhndFScTceq5e6GvVQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <title>Arama Sonuçları</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Lilita+One&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
-  </style>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    body {
-      background-color: #1e293b;
-      color: #ffffff;
-      font-family: "Noto Sans", sans-serif;
-    }
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
-    .separator {
-      width: 12rem;
-      height: 0.25rem;       
-      margin: 1rem auto;      
-      background-color: #f3f4f6; 
-      border: none;          
-      border-radius: 0.25rem;
-    }
+body {
+  background-color: #1e293b;
+  color: #ffffff;
+  font-family: "Noto Sans", sans-serif;
+}
 
-    body.dark .separator {
-      background-color: #374151;
-    }
+.separator {
+  width: 12rem;
+  height: 0.25rem;
+  margin: 1rem auto;
+  background-color: #f3f4f6;
+  border: none;
+  border-radius: 0.25rem;
+}
 
-    .tab-buttons {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 1rem;
-    }
+.tab-buttons {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
 
-    .tab-buttons button {
-      background-color: #374151;
-      color: white;
-      border: 2px solid transparent;
-      padding: 0.5rem 1rem;
-      border-radius: 0.5rem;
-      margin: 0 0.5rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
+.tab-buttons button {
+  background-color: #374151;
+  color: white;
+  border: 2px solid transparent;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  margin: 0 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
 
-    .tab-buttons button.active {
-      border-color: #60a5fa;
-      background-color: #2563eb;
-    }
+.tab-buttons button.active {
+  border-color: #60a5fa;
+  background-color: #2563eb;
+}
 
-    .tab-buttons button:hover {
-      background-color: #2563eb;
-    }
+.content-container {
+  display: none;
+}
 
-    .content-container {
-      display: none;
-    }
+.content-container.active {
+  display: block;
+}
 
-    .content-container.active {
-      display: block;
-    }
+.result-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 1rem 0;
+}
 
-    .result-container {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      margin: 1rem 0;
-    }
+.result-card {
+  background-color: #374151;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  text-align: left;
+}
 
-    .result-card {
-      background-color: #374151;
-      border-radius: 0.5rem;
-      padding: 1rem;
-      text-align: left;
-    }
+img {
+  border-radius: 0.5rem;
+  max-height: 150px;
+  display: block;
+  margin: 0 auto;
+}
 
-    img {
-      border-radius: 0.5rem;
-      max-height: 150px;
-      display: block;
-      margin: 0 auto;
-    }
+footer {
+  margin-top: 3rem;
+  text-align: center;
+  color: #d1d5db;
+  font-size: 0.875rem;
+}
   </style>
 </head>
 <body class="bg-slate-800 text-white min-h-screen flex flex-col items-center p-6">
 
+ 
   <div class="mb-6">
     <a href="/"><img src="https://raw.githubusercontent.com/devyigit/Web-Terminal/refs/heads/main/synapic.png" alt="Logo" class="w-32 h-32 rounded-full mx-auto"></a>
   </div>
 
   <form action="/search" method="GET" class="flex items-center max-w-sm mx-auto mb-6">
-    <label for="simple-search" class="sr-only">Search</label>
     <div class="relative w-full">
       <input type="text" id="simple-search" name="query" class="bg-gray-700 border border-gray-600 text-gray-100 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5" placeholder="Sonsuzluğu Ara..." required />
     </div>
@@ -102,11 +101,10 @@
       </svg>
       <span class="sr-only">Search</span>
     </button>
-
     <!-- Sesli Arama Butonu -->
-      <button type="button" id="voice-search-btn" class="p-2.5 ml-2 text-sm font-medium text-white bg-green-600 rounded-lg border border-blue-700 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-500 shadow-lg">
-        <i class="fas fa-microphone"></i>
-      </button>
+    <button type="button" id="voice-search-btn" class="p-2.5 ml-2 text-sm font-medium text-white bg-green-600 rounded-lg border border-blue-700 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-500 shadow-lg">
+      <i class="fas fa-microphone"></i>
+    </button>
   </form>
 
   <hr class="separator">
@@ -114,19 +112,19 @@
   <!-- Sekme Butonları -->
   <div class="tab-buttons">
     <button class="active" data-tab="google-tab">Web</button>
-    <button data-tab="images-tab">Görsel</button>
+    <button data-tab="images-tab">Görseller</button>
+    <button data-tab="shopping-tab">Alışveriş</button>
   </div>
 
-  <!-- Google Sonuçları -->
+  <!-- Web Sonuçları -->
   <div id="google-tab" class="content-container active">
-    <h2 class="text-xl mb-4">Google Sonuçları</h2>
+    <h2 class="text-xl mb-4">Web Sonuçları</h2>
     <div class="result-container">
       <% if (results && results.length > 0) { %>
         <% results.forEach(result => { %>
           <div class="result-card">
             <a href="<%= result.link %>" target="_blank" class="text-blue-400 hover:underline text-lg"><%= result.title %></a>
             <p class="text-gray-300"><%= result.snippet %></p>
-            <p class="text-yellow-400">Rating: <%= '⭐'.repeat(result.rating) %> (<%= result.rating %>/10)</p>
           </div>
         <% }) %>
       <% } else { %>
@@ -135,9 +133,9 @@
     </div>
   </div>
 
-  <!-- Resim Sonuçları -->
+  <!-- Görsel Sonuçları -->
   <div id="images-tab" class="content-container">
-    <h2 class="text-xl mb-4">Resim Sonuçları</h2>
+    <h2 class="text-xl mb-4">Görsel Sonuçları</h2>
     <div class="result-container">
       <% if (images && images.length > 0) { %>
         <% images.forEach(image => { %>
@@ -153,47 +151,61 @@
     </div>
   </div>
 
+  <!-- Alışveriş Sonuçları -->
+  <div id="shopping-tab" class="content-container">
+    <h2 class="text-xl m-4"><i class="fa-solid fa-shield-halved" style="color: #74C0FC;"></i> Geliştirme Aşamasında...</h2>
+    <div class="result-container">
+      <% if (shoppingResults && shoppingResults.length > 0) { %>
+        <% shoppingResults.forEach(result => { %>
+          <div class="result-card">
+            <a href="<%= result.link %>" target="_blank" class="text-blue-400 hover:underline text-lg"><%= result.product %></a>
+          </div>
+        <% }) %>
+      <% } else { %>
+        <p>Alışveriş sonucu bulunamadı.</p>
+      <% } %>
+    </div>
+  </div>
+
   <script>
-    const buttons = document.querySelectorAll('.tab-buttons button');
-    const tabs = document.querySelectorAll('.content-container');
+    // Sekme butonlarına tıklama olayını dinleme
+const buttons = document.querySelectorAll('.tab-buttons button');
+const tabs = document.querySelectorAll('.content-container');
 
-    buttons.forEach(button => {
-      button.addEventListener('click', () => {
-        buttons.forEach(btn => btn.classList.remove('active'));
-        button.classList.add('active');
+buttons.forEach(button => {
+  button.addEventListener('click', () => {
+    buttons.forEach(btn => btn.classList.remove('active'));
+    button.classList.add('active');
 
-        const target = button.getAttribute('data-tab');
-        tabs.forEach(tab => {
-          if (tab.id === target) {
-            tab.classList.add('active');
-          } else {
-            tab.classList.remove('active');
-          }
-        });
-      });
+    const target = button.getAttribute('data-tab');
+    tabs.forEach(tab => {
+      if (tab.id === target) {
+        tab.classList.add('active');
+      } else {
+        tab.classList.remove('active');
+      }
     });
-
-    // Sesli Arama İşlevi
-  const voiceSearchButton = document.getElementById('voice-search-btn');
-  const searchInput = document.getElementById('simple-search');
-
-  const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-
-  voiceSearchButton.addEventListener('click', () => {
-    recognition.start();
   });
+});
 
-  recognition.onresult = (event) => {
-    const transcript = event.results[0][0].transcript;
-    searchInput.value = transcript;
-  };
+// Sesli arama işlevi
+const voiceSearchButton = document.getElementById('voice-search-btn');
+const searchInput = document.getElementById('simple-search');
 
-  recognition.onerror = (event) => {
-    console.error('Speech recognition error', event.error);
-  };
-  </script>
-<footer class="mt-10 text-center text-gray-500 text-sm">
-      <a href="/gizlilik-politikasi">Gizlilik Politikası</a> | <a href="/hizmet-sartlari">Hizmet Şartları</a>
-</footer>
-</body>
+const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+
+voiceSearchButton.addEventListener('click', () => {
+  recognition.start();
+});
+
+recognition.onresult = (event) => {
+  const transcript = event.results[0][0].transcript;
+  searchInput.value = transcript;
+};
+
+recognition.onerror = (event) => {
+  console.error('Speech recognition error', event.error);
+};
+</script>
+      </body>
       </html>
