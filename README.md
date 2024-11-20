@@ -31,22 +31,19 @@ Projenin kullanıcı arayüzünü görmek için aşağıdaki ekran görüntüler
 Synapic projesini yerel bilgisayarınızda çalıştırmak için aşağıdaki adımları takip edebilirsiniz:
 
 1. Bu repoyu klonlayın:
-   ```bash
-   git clone https://github.com/your-username/synapic.git
+   ```
+   git clone https://github.com/devyigit/synapic.git
 ```
 
-2. Proje klasörüne gidin:
-
-```bash
-cd synapic
+2. Ana Projemizi Açın:
+   ```
+cd Synapic
 ```
 
-3. app.js'i çalıştırın.
-
-```bash
+3. Ana Dosyamızı Çalıştırın:
+   ```
 node app.js
 ```
-
 
 Proje, NodeJS kullanarak kendi motoruyla bağlantı sağlıyor bu sebeple bir sunucuda çalışıyor hiçbir şekilde cookielere ulaşmıyor ve reklam göstermiyor.
 
