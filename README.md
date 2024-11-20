@@ -31,7 +31,7 @@ Projenin kullanıcı arayüzünü görmek için aşağıdaki ekran görüntüler
 Synapic projesini yerel bilgisayarınızda çalıştırmak için aşağıdaki adımları takip edebilirsiniz:
 
 1. Bu repoyu klonlayın:
-   ```git clone https://github.com/devyigit/synapic.git```
+   ```bash git clone https://github.com/devyigit/synapic.git```
 
 2. Ana Projemizi Açın:
    ```cd Synapic```
