@@ -36,11 +36,13 @@ Synapic projesini yerel bilgisayarınızda çalıştırmak için aşağıdaki ad
 ```
 
 2. Proje klasörüne gidin:
+
 ```bash
 cd synapic
 ```
 
 3. app.js'i çalıştırın.
+
 ```bash
 node app.js
 ```
