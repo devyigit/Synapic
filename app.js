@@ -3,7 +3,7 @@ const axios = require('axios');
 const app = express();
 const PORT = 3000;
 
-const googleApiKey = 'AIzaSyCXcO_MuQ0sjzLzlI3DeMaYeMSIPptxHEQ';
+const googleApiKey = 'AIzaSyDJsSgqZNQtWE1HH-RIRFZWIETuskgVVXo';
 const googleCx = '14186417efcac49f0';
 const ipinfoToken = 'c621d5706831cd';
 
