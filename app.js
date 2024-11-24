@@ -23,6 +23,9 @@ function apiKeyMiddleware(req, res, next) {
   next(); // API key geçerli, devam et
 }
 
+app.get('/shop', async (req, res) => {
+  res.render('shop');
+});
 // Sistem için kullanılan arama rotası (kullanıcılar için)
 app.get('/search', async (req, res) => {
   const query = req.query.query;
@@ -112,6 +115,8 @@ app.get('/api/search', apiKeyMiddleware, async (req, res) => {
 
 // Ana sayfa rotası
 app.get('/', async (req, res) => {
+  const theme = req.query.theme || "default"; // Varsayılan tema "default"
+
   let countryCode = "N/A";
 
   try {
@@ -122,7 +127,16 @@ app.get('/', async (req, res) => {
     console.error("Ülke kodu alınırken bir hata oluştu:", error);
   }
 
-  res.render('index', { countryCode });
+  // Temaya göre parametre ile dosyaları render et
+  if (theme === "green") {
+    res.render('index', { countryCode, theme: "green" });
+  } else if (theme === "red") {
+    res.render('theme/red', { countryCode, theme: "red" });
+  } else if (theme === "blue") {
+    res.render('theme/blue', { countryCode, theme: "blue" });
+  } else {
+    res.render('index', { countryCode, theme: "default" });
+  }
 });
 
 app.get('/bagis', (req, res) => {
