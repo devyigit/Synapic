@@ -69,7 +69,7 @@ Katkıda bulunmak isterseniz, aşağıdaki adımları izleyebilirsiniz:
 
 # Bu Projeyi Satın Al! 💶
 
-bu proje tüm sistemleri ve geliştiriciler ile birlikte satılıktır. almak için lütfen <a href="https://discord.com/users/1067172678894624788>buraya tıklayarak</a> geliştiricilerle iletişime geçin.
+bu proje tüm sistemleri ve geliştiriciler ile birlikte satılıktır. almak için lütfen <a href="https://discord.com/users/1067172678894624788">buraya tıklayarak</a> geliştiricilerle iletişime geçin.
 
 # Lisans
 
