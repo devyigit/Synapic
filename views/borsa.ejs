@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Borsa Uygulaması</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body class="bg-gray-900 text-white min-h-screen flex flex-col items-center justify-center">
+  <div class="mb-8">
+    <a href="/" class="block">
+      <img src="https://raw.githubusercontent.com/devyigit/Synapic/refs/heads/main/images/green.png" alt="Synapic Logo" class="w-40 h-40 rounded-full mx-auto shadow-lg">
+    </a>
+  </div>
+  <div class="text-center">
+    <h1 class="text-3xl font-bold mb-6">Borsa Uygulaması</h1>
+    <div id="rates" class="space-y-4">
+      <!-- USD Card -->
+      <div class="bg-gray-800 rounded-lg p-6 shadow-lg flex items-center justify-between">
+        <div>
+          <h2 class="text-xl font-semibold">Dolar (USD)</h2>
+          <p id="dollarRate" class="text-lg mt-2"><i class="fa-sharp fa-solid fa-dollar-sign" style="color: #63E6BE;"></i> Yükleniyor...</p>
+        </div>
+        <i class="fas fa-dollar-sign text-2xl text-yellow-400"></i>
+      </div>
+      <!-- EUR Card -->
+      <div class="bg-gray-800 rounded-lg p-6 shadow-lg flex items-center justify-between">
+        <div>
+          <h2 class="text-xl font-semibold">Euro (EUR)</h2>
+          <p id="euroRate" class="text-lg mt-2"><i class="fa-solid fa-euro-sign" style="color: #63E6BE;"></i> Yükleniyor...</p>
+        </div>
+        <i class="fas fa-euro-sign text-2xl text-blue-400"></i>
+      </div>
+      <!-- GBP Card -->
+      <div class="bg-gray-800 rounded-lg p-6 shadow-lg flex items-center justify-between">
+        <div>
+          <h2 class="text-xl font-semibold">Sterlin (GBP)</h2>
+          <p id="gbpRate" class="text-lg mt-2"><i class="fa-solid fa-pound-sign" style="color: #63E6BE;"></i> Yükleniyor...</p>
+        </div>
+        <i class="fas fa-pound-sign text-2xl text-green-400"></i>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    async function fetchExchangeRates() {
+      try {
+        // Dolar verisini çek
+        const dollarResponse = await fetch('https://api.exchangerate-api.com/v4/latest/USD');
+        const dollarData = await dollarResponse.json();
+
+        // Euro verisini çek
+        const euroResponse = await fetch('https://api.exchangerate-api.com/v4/latest/EUR');
+        const euroData = await euroResponse.json();
+
+        // Sterlin verisini çek
+        const gbpResponse = await fetch('https://api.exchangerate-api.com/v4/latest/GBP');
+        const gbpData = await gbpResponse.json();
+
+        // API'den gelen verileri kontrol et
+        if (dollarData && dollarData.rates && euroData && euroData.rates && gbpData && gbpData.rates) {
+          // USD'yi TRY olarak göster
+          document.getElementById('dollarRate').textContent = `${dollarData.rates.TRY.toFixed(2)} TRY`;
+
+          // EUR'yu TRY olarak göster
+          document.getElementById('euroRate').textContent = `${euroData.rates.TRY.toFixed(2)} TRY`;
+
+          // GBP'yi TRY olarak göster
+          document.getElementById('gbpRate').textContent = `${gbpData.rates.TRY.toFixed(2)} TRY`;
+        } else {
+          throw new Error('API verileri eksik');
+        }
+      } catch (error) {
+        console.error('Kurlar alınırken hata oluştu:', error);
+        document.getElementById('dollarRate').textContent = 'Veri alınamadı.';
+        document.getElementById('euroRate').textContent = 'Veri alınamadı.';
+        document.getElementById('gbpRate').textContent = 'Veri alınamadı.';
+      }
+    }
+
+    fetchExchangeRates();
+  </script>
+</body>
+</html>
