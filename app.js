@@ -1,5 +1,6 @@
 const express = require('express');
 const axios = require('axios');
+const ejs = require('ejs');
 const app = express();
 const PORT = 3000;
 
@@ -34,10 +35,9 @@ const checkApiKey = (req, res, next) => {
   next();
 };
 
-
-app.get('/dino', function(req, res) {
-  res.render('dino');
-});
+app.get('/borsa', (req, res) => {
+  res.render('borsa');
+})
 
 app.get('/api', function(req, res) {
   res.render('api');
@@ -50,6 +50,21 @@ app.get('/api/dolar', checkApiKey, async (req, res) => {
     const zaman = response.data.time_last_updated;
     const duzen = {
       dolar: dolar,
+      zaman: zaman
+    };
+    res.json(duzen); // Send JSON response with exchange rate and last update time
+  } catch (error) {
+    res.status(500).json({ error: 'An error occurred' });
+  }
+});
+
+app.get('/api/sterlin', checkApiKey, async (req, res) => {
+  try {
+    const response = await axios.get('https://api.exchangerate-api.com/v4/latest/GBP');
+    const sterlin = response.data.rates.TRY;
+    const zaman = response.data.time_last_updated;
+    const duzen = {
+      sterlin: sterlin,
       zaman: zaman
     };
     res.json(duzen); // Send JSON response with exchange rate and last update time
@@ -142,7 +157,7 @@ app.get('/api/search', apiKeyMiddleware, async (req, res) => {
 
     const endTime = Date.now(); // Zaman ölçümünü bitir
     const elapsedTime = ((endTime - startTime) / 1000).toFixed(2); // Süreyi saniye cinsine çevir
-    
+
     const searchResponse = await axios.get('https://www.googleapis.com/customsearch/v1', {
       params: { key: googleApiKey, cx: googleCx, q: query }
     });
