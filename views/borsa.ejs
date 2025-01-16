@@ -16,7 +16,6 @@
   <div class="text-center">
     <h1 class="text-3xl font-bold mb-6">Borsa Uygulaması</h1>
     <div id="rates" class="space-y-4">
-      <!-- USD Card -->
       <div class="bg-gray-800 rounded-lg p-6 shadow-lg flex items-center justify-between">
         <div>
           <h2 class="text-xl font-semibold">Dolar (USD)</h2>
@@ -24,7 +23,6 @@
         </div>
         <i class="fas fa-dollar-sign text-2xl text-yellow-400"></i>
       </div>
-      <!-- EUR Card -->
       <div class="bg-gray-800 rounded-lg p-6 shadow-lg flex items-center justify-between">
         <div>
           <h2 class="text-xl font-semibold">Euro (EUR)</h2>
@@ -32,7 +30,6 @@
         </div>
         <i class="fas fa-euro-sign text-2xl text-blue-400"></i>
       </div>
-      <!-- GBP Card -->
       <div class="bg-gray-800 rounded-lg p-6 shadow-lg flex items-center justify-between">
         <div>
           <h2 class="text-xl font-semibold">Sterlin (GBP)</h2>
@@ -46,27 +43,18 @@
   <script>
     async function fetchExchangeRates() {
       try {
-        // Dolar verisini çek
         const dollarResponse = await fetch('https://api.exchangerate-api.com/v4/latest/USD');
         const dollarData = await dollarResponse.json();
 
-        // Euro verisini çek
         const euroResponse = await fetch('https://api.exchangerate-api.com/v4/latest/EUR');
         const euroData = await euroResponse.json();
 
-        // Sterlin verisini çek
         const gbpResponse = await fetch('https://api.exchangerate-api.com/v4/latest/GBP');
         const gbpData = await gbpResponse.json();
 
-        // API'den gelen verileri kontrol et
         if (dollarData && dollarData.rates && euroData && euroData.rates && gbpData && gbpData.rates) {
-          // USD'yi TRY olarak göster
           document.getElementById('dollarRate').textContent = `${dollarData.rates.TRY.toFixed(2)} TRY`;
-
-          // EUR'yu TRY olarak göster
           document.getElementById('euroRate').textContent = `${euroData.rates.TRY.toFixed(2)} TRY`;
-
-          // GBP'yi TRY olarak göster
           document.getElementById('gbpRate').textContent = `${gbpData.rates.TRY.toFixed(2)} TRY`;
         } else {
           throw new Error('API verileri eksik');
