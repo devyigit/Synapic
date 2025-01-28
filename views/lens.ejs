@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resim Yükleme ve Yönlendirme</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome for icons -->
+  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</head>
+<body class="bg-gray-900 text-white flex items-center justify-center h-screen dark">
+
+  <div class="bg-gray-800 p-8 rounded-lg shadow-lg w-96">
+    <h1 class="text-2xl font-semibold text-center mb-4">Resim Yükle <i class="fas fa-image"></i></h1>
+    
+    <!-- Emoji Section -->
+    <div class="text-center mb-4 text-xl">
+      <p>Resmi yükleyin! 🖼️✨</p>
+    </div>
+
+    <!-- File Upload Form -->
+    <form id="upload-form" class="space-y-4">
+      <div class="mb-4">
+        <label for="file-input" class="block text-sm font-medium text-gray-300">Resim Seç 👇</label>
+        <input type="file" id="file-input" class="mt-1 block w-full border border-gray-700 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 bg-gray-700 text-white">
+      </div>
+      <button type="submit" class="w-full bg-indigo-600 text-white p-2 rounded-md hover:bg-indigo-800 flex items-center justify-center">
+        Yükle <i class="fas fa-upload ml-2"></i>
+      </button>
+    </form>
+
+  </div>
+
+  <script>
+    // Dosya yükleme ve yönlendirme işlemi
+    document.getElementById("upload-form").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const fileInput = document.getElementById("file-input");
+      if (fileInput.files.length > 0) {
+        const fileName = fileInput.files[0].name; // Resim dosyasının adı
+        const fileNameWithoutExtension = fileName.replace(/\.[^/.]+$/, ""); // Uzantıyı kaldır
+
+        const searchUrl = `/search?query=${encodeURIComponent(fileNameWithoutExtension)}`;
+        window.location.href = searchUrl; // Kullanıcıyı yeni sayfaya yönlendir
+      } else {
+        alert("Lütfen bir dosya seçin.");
+      }
+    });
+  </script>
+
+</body>
+</html>
