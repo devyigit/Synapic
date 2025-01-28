@@ -190,6 +190,10 @@ app.get('/gizlilik-politikasi', (req, res) => {
   res.render('gizlilik-politikasi');
 });
 
+app.get('/lens', (req, res) => {
+  res.render('lens');
+});
+
 app.get('/hizmet-sartlari', (req, res) => {
   res.render('hizmet-sartlari');
 });
